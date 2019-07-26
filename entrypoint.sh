@@ -2,4 +2,5 @@
 
 set -e
 
-sh -c "run $*"
+echo $@
+sh -c "fly $@"
