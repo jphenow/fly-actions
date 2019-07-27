@@ -2,5 +2,7 @@
 
 set -e
 
+pwd
+ls
 echo $@
 sh -c "fly $@"
