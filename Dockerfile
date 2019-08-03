@@ -1,4 +1,4 @@
-FROM buildpack-deps:stretch-curl
+FROM docker:stable
 
 LABEL version="2.0.0"
 LABEL repository="https://github.com/jphenow/fly-actions"
@@ -11,6 +11,7 @@ LABEL com.github.actions.icon="package"
 LABEL com.github.actions.color="purple"
 COPY LICENSE README.md /
 
+RUN apk add --no-cache curl
 RUN curl https://get.fly.io/flyctl.sh | sh
 
 COPY "entrypoint.sh" "/entrypoint.sh"
