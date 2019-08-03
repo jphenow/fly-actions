@@ -1,6 +1,6 @@
-FROM debian:stretch-slim
+FROM buildpack-deps:stretch-curl
 
-LABEL version="1.0.0"
+LABEL version="2.0.0"
 LABEL repository="https://github.com/jphenow/fly-actions"
 LABEL homepage="https://github.com/jphenow/fly-actions"
 LABEL maintainer="Jon Phenow <jon@jphenow.com>"
@@ -11,12 +11,7 @@ LABEL com.github.actions.icon="package"
 LABEL com.github.actions.color="purple"
 COPY LICENSE README.md /
 
-RUN  apt-get update \
-    && apt-get install -y wget tar \
-    && rm -rf /var/lib/apt/lists/*
-RUN wget -q https://get.fly.io/tarballs/stable/fly-v0.54.2/fly-v0.54.2-linux-x64.tar.gz && \
-    tar -xf fly-v0.54.2-linux-x64.tar.gz
-ENV PATH="$PWD/fly/bin:${PATH}"
+RUN curl https://get.fly.io/flyctl.sh | sh
 
 COPY "entrypoint.sh" "/entrypoint.sh"
 ENTRYPOINT ["/entrypoint.sh"]
